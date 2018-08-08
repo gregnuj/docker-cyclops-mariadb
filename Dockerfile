@@ -12,5 +12,5 @@ ADD ./rootfs /
 
 VOLUME ["/var/lib/mysql"]
 WORKDIR /var/lib/mysql
-EXPOSE 22 80 3360
+EXPOSE 22 8000 3360
 CMD ["/usr/bin/supervisord", "-n"]
