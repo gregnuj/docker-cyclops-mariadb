@@ -5,7 +5,8 @@ USER root
 # Install packages 
 RUN set -ex \
     && apk add --no-cache \
-    mariadb
+    mariadb \
+    mariadb-client
 
 # add files in rootfs
 ADD ./rootfs /
