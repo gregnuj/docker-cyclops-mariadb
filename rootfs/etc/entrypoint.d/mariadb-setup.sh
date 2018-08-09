@@ -7,5 +7,10 @@ export MYSQL_SOCK_DIR="${MYSQL_SOCK_DIR:-/run/mysqld}"
 
 mkdir -p ${MYSQL_DIR}
 mkdir -p ${MYSQL_SOCK_DIR}
+
+if [ ! -d "${MYSQL_DIR}/mysql" ]; then
+    mysql_install_db --user=${APP_USER}
+fi
+
 chown -R ${APP_USER}:${APP_GROUP} ${MYSQL_DIR}
 chown -R ${APP_USER}:${APP_GROUP} ${MYSQL_SOCK_DIR}
