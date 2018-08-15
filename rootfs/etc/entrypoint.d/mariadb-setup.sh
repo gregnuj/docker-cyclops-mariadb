@@ -16,7 +16,8 @@ if [ ! -d "${MYSQL_DIR}/mysql" ]; then
 fi
 
 if [ -f "${MYSQL_CONF_DIR}/my.cnf" ]; then
-	echo "\n!includedir ${MYSQL_CONF_DIR}/conf.d" >> "${MYSQL_CONF_DIR}/my.cnf"
+	echo "" >> "${MYSQL_CONF_DIR}/my.cnf\n"
+	echo "!includedir ${MYSQL_CONF_DIR}/conf.d" >> "${MYSQL_CONF_DIR}/my.cnf"
 fi
 
 chown -R ${APP_USER}:${APP_GROUP} ${MYSQL_DIR}
