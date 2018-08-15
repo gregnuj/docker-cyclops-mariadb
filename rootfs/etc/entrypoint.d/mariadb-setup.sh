@@ -3,15 +3,20 @@
 export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export MYSQL_DIR="${MYSQL_DIR:-/var/lib/mysql}"
-export MYSQL_CONF_DIR="${MYSQL_DIR:-/etc/mysql}"
+export MYSQL_CONF_DIR="${MYSQL_CONF_DIR:-/etc/mysql}"
 export MYSQL_SOCK_DIR="${MYSQL_SOCK_DIR:-/run/mysqld}"
 
-mkdir -p ${MYSQL_DIR}
-mkdir -p ${MYSQL_CONF_DIR}
-mkdir -p ${MYSQL_SOCK_DIR}
+mkdir -p "${MYSQL_DIR}"
+mkdir -p "${MYSQL_CONF_DIR}"
+mkdir -p "${MYSQL_SOCK_DIR}"
+mkdir -p "${MYSQL_CONF_DIR}/conf.d"
 
 if [ ! -d "${MYSQL_DIR}/mysql" ]; then
     mysql_install_db --user=${APP_USER}
+fi
+
+if [ -f "${MYSQL_CONF_DIR}/my.cnf" ]; then
+	echo "\n!includedir ${MYSQL_CONF_DIR}/conf.d" >> "${MYSQL_CONF_DIR}/my.cnf"
 fi
 
 chown -R ${APP_USER}:${APP_GROUP} ${MYSQL_DIR}
