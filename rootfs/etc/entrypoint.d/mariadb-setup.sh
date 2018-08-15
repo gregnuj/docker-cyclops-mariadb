@@ -3,7 +3,6 @@
 export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export MYSQL_DIR="${MYSQL_DIR:-/var/lib/mysql}"
-export MYSQLD_CMD="${MYSQL_CMD:-/usr/bin/mysqld}"
 export MYSQL_CONF_DIR="${MYSQL_CONF_DIR:-/etc/mysql}"
 export MYSQL_SOCK_DIR="${MYSQL_SOCK_DIR:-/run/mysqld}"
 
