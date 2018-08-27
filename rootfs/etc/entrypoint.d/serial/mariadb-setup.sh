@@ -5,15 +5,8 @@ export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export MYSQL_DIR="${MYSQL_DIR:-/var/lib/mysql}"
 export MYSQL_CONF_DIR="${MYSQL_CONF_DIR:-/etc/mysql}"
 export MYSQL_SOCK_DIR="${MYSQL_SOCK_DIR:-/run/mysqld}"
-
-# mysql does not like to run as root
-if [ "$APP_USER" == "root" ]; then
-   export MYSQL_USER="mysql"
-   export MYSQL_GROUP="mysql"
-else
-   export MYSQL_USER="${APP_USER}"
-   export MYSQL_GROUP="${APP_GROUP}"
-fi
+export MYSQL_USER="${APP_USER}"
+export MYSQL_GROUP="${APP_GROUP}"
 
 mkdir -p "${MYSQL_DIR}"
 mkdir -p "${MYSQL_CONF_DIR}"
