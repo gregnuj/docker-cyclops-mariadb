@@ -18,7 +18,7 @@ if [ ! -d "${MYSQL_DIR}/mysql" ]; then
 fi
 
 if [ -f "${MYSQL_CONF_DIR}/my.cnf" ]; then
-	echo "" >> "${MYSQL_CONF_DIR}/my.cnf\n"
+	echo "" >> "${MYSQL_CONF_DIR}/my.cnf"
 	echo "!includedir ${MYSQL_CONF_DIR}/conf.d" >> "${MYSQL_CONF_DIR}/my.cnf"
 fi
 
