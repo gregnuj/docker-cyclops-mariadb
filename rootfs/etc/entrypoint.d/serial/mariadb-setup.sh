@@ -8,6 +8,7 @@ export MYSQL_CONF_DIR="${MYSQL_CONF_DIR:-/etc/mysql}"
 export MYSQL_SOCK_DIR="${MYSQL_SOCK_DIR:-/run/mysqld}"
 export MYSQL_USER="${APP_USER}"
 export MYSQL_GROUP="${APP_GROUP}"
+export MYSQL_CRONTAB="/etc/crontabs/${MYSQL_USER}"
 
 # create directories
 mkdir -p "${MYSQL_DIR}"
@@ -29,8 +30,14 @@ fi
 
 # setup replication check in crond
 if [ -n "$REPLICATION_MASTER" ]; then
-	echo "*/15   *   *   *   * /usr/local/bin/check_replication.sh"  >> /etc/crontabs/${MYSQL_USER}
-	chown -R ${MYSQL_USER}:${MYSQL_GROUP} /etc/crontabs/${MYSQL_USER}
+	if [ -f "${MYSQL_CRONTAB}" ]; then
+		if ! grep -q "check_replication.sh" "${MYSQL_CRONTAB}"; then
+			echo "*/15   *   *   *   * /usr/local/bin/check_replication.sh"  >> ${MYSQL_CRONTAB}
+		fi
+	else
+		echo "*/15   *   *   *   * /usr/local/bin/check_replication.sh"  >> ${MYSQL_CRONTAB}
+	fi
+	chown -R ${MYSQL_USER}:${MYSQL_GROUP} ${MYSQL_CRONTAB}
 fi
 
 # set permissions
