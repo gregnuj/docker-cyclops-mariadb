@@ -2,6 +2,8 @@ FROM gregnuj/cyclops-base:stretch
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 USER root
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install packages 
 RUN set -ex \
     && sudo apt-key adv --no-tty --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
